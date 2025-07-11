@@ -4,6 +4,33 @@ import { authorProfile } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Twitter, Linkedin, Github } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Author Profile',
+  description: `Learn more about ${authorProfile.name}, a passionate writer and digital strategist.`,
+   alternates: {
+    canonical: '/profile',
+  },
+  openGraph: {
+    title: `${authorProfile.name} | PenaMaya`,
+    description: authorProfile.bio,
+    url: '/profile',
+    images: [
+        {
+          url: authorProfile.picture,
+          width: 200,
+          height: 200,
+          alt: authorProfile.name,
+        },
+      ],
+  },
+  twitter: {
+    title: `${authorProfile.name} | PenaMaya`,
+    description: authorProfile.bio,
+     images: [authorProfile.picture],
+  },
+};
 
 export default function ProfilePage() {
   return (

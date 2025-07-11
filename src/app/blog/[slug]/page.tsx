@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { blogPosts, authorProfile } from '@/lib/data';
+import { blogPosts } from '@/lib/data';
 import { RelatedBlogs } from '@/components/blog/related-blogs';
 import { AdSpot } from '@/components/shared/ad-spot';
 import { Badge } from '@/components/ui/badge';
@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowLeft } from 'lucide-react';
 import { BlogActions } from '@/components/blog/blog-actions';
 import { Separator } from '@/components/ui/separator';
+import type { Metadata } from 'next';
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -19,6 +20,50 @@ export async function generateStaticParams() {
 interface PageProps {
   params: {
     slug: string;
+  };
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const post = blogPosts.find((p) => p.slug === params.slug);
+
+  if (!post) {
+    return {
+      title: 'Post Not Found',
+    };
+  }
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const postUrl = `${siteUrl}/blog/${post.slug}`;
+  const imageUrl = post.coverImage.startsWith('http') ? post.coverImage : `${siteUrl}${post.coverImage}`;
+
+  return {
+    title: post.title,
+    description: post.summary,
+    alternates: {
+      canonical: postUrl,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.summary,
+      url: postUrl,
+      type: 'article',
+      publishedTime: post.publicationDate,
+      authors: [post.authorName],
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.summary,
+      images: [imageUrl],
+    },
   };
 }
 
