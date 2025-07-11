@@ -7,6 +7,8 @@ import { AdSpot } from '@/components/shared/ad-spot';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowLeft } from 'lucide-react';
+import { BlogActions } from '@/components/blog/blog-actions';
+import { Separator } from '@/components/ui/separator';
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -72,6 +74,12 @@ export default function BlogDetailPage({ params }: PageProps) {
           </aside>
         </div>
       </article>
+
+      <div className="mt-12">
+        <BlogActions post={post} />
+      </div>
+
+      <Separator className="my-12" />
 
       <div className="mt-16">
         <RelatedBlogs currentPost={post} allPosts={blogPosts} />
