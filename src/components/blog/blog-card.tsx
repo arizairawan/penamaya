@@ -25,11 +25,12 @@ export function BlogCard({ post }: BlogCardProps) {
           </div>
         </CardHeader>
         <CardContent className="flex-grow p-6">
+          <Badge variant="secondary" className="mb-2">{post.category}</Badge>
           <CardTitle className="text-lg font-semibold leading-snug mb-2">{post.title}</CardTitle>
-          <p className="text-sm text-muted-foreground line-clamp-3">{post.summary}</p>
+          <p className="text-sm text-muted-foreground line-clamp-2">{post.summary}</p>
         </CardContent>
         <CardFooter className="flex justify-between items-center p-6 pt-0">
-           <Badge variant="secondary">{new Date(post.publicationDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</Badge>
+           <span className="text-xs text-muted-foreground">{new Date(post.publicationDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
           <div className="flex items-center text-primary text-sm font-medium">
             Read More
             <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

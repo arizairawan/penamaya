@@ -5,6 +5,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   summary: string;
+  category: string;
   coverImage: string;
   publicationDate: string;
   authorName: string;
@@ -19,6 +20,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'the-art-of-storytelling',
     title: 'The Art of Storytelling in the Digital Age',
     summary: 'Exploring how ancient storytelling techniques can be adapted for modern digital platforms to create compelling narratives.',
+    category: 'Creativity',
     coverImage: 'https://placehold.co/600x400.png',
     publicationDate: '2024-05-15',
     authorName: 'Jane Doe',
@@ -38,6 +40,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'productivity-hacks-for-creators',
     title: '10 Productivity Hacks for Creative Minds',
     summary: 'Boost your creative output with these proven productivity techniques tailored for writers, designers, and artists.',
+    category: 'Productivity',
     coverImage: 'https://placehold.co/600x400.png',
     publicationDate: '2024-05-10',
     authorName: 'Jane Doe',
@@ -59,6 +62,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'building-a-personal-brand',
     title: 'How to Build a Personal Brand That Resonates',
     summary: 'A step-by-step guide to crafting an authentic personal brand that connects with your target audience and opens up new opportunities.',
+    category: 'Personal Growth',
     coverImage: 'https://placehold.co/600x400.png',
     publicationDate: '2024-05-01',
     authorName: 'Jane Doe',
@@ -77,6 +81,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'the-future-of-remote-work',
     title: 'The Future of Remote Work: Trends & Predictions',
     summary: 'Analyzing the shift towards remote work and what it means for employees and companies in the coming years.',
+    category: 'Future of Work',
     coverImage: 'https://placehold.co/600x400.png',
     publicationDate: '2024-04-25',
     authorName: 'Jane Doe',
@@ -90,6 +95,42 @@ export const blogPosts: BlogPost[] = [
     ),
     contentText: "The pandemic accelerated the adoption of remote work, but the trend is here to stay. Companies and employees are discovering the benefits of flexibility, autonomy, and a better work-life balance. But what does the future hold? We explore key trends like the rise of hybrid models, the importance of asynchronous communication, and the need for new tools to foster collaboration and culture in a distributed workforce. We also discuss the challenges, such as maintaining team cohesion and preventing burnout. The future of work is not just about location; it's about a fundamental shift in how we approach productivity, collaboration, and employee well-being."
   },
+  {
+    id: 5,
+    slug: 'mindfulness-for-creatives',
+    title: 'Embracing Mindfulness to Unlock Creativity',
+    summary: 'Discover how mindfulness practices can help you overcome creative blocks and tap into a deeper well of inspiration.',
+    category: 'Creativity',
+    coverImage: 'https://placehold.co/600x400.png',
+    publicationDate: '2024-04-20',
+    authorName: 'Jane Doe',
+    authorImage: 'https://placehold.co/100x100.png',
+    content: (
+      <div className="space-y-6">
+        <p>The creative process can be a rollercoaster of emotions. One day you're in the flow, and the next you're staring at a blank page. Mindfulness can be a powerful anchor during this process.</p>
+        <p>This article explores simple mindfulness exercises, such as meditation and mindful walking, that can help calm the inner critic, improve focus, and open up new neural pathways for creative thought. By being present, you can connect more deeply with your ideas.</p>
+      </div>
+    ),
+    contentText: "The creative process can be a rollercoaster of emotions. One day you're in the flow, and the next you're staring at a blank page. Mindfulness can be a powerful anchor during this process. This article explores simple mindfulness exercises, such as meditation and mindful walking, that can help calm the inner critic, improve focus, and open up new neural pathways for creative thought. By being present, you can connect more deeply with your ideas.",
+  },
+  {
+    id: 6,
+    slug: 'the-gig-economy',
+    title: 'Navigating the Gig Economy as a Creator',
+    summary: 'A practical guide for freelancers and independent creators on thriving in the gig economy.',
+    category: 'Productivity',
+    coverImage: 'https://placehold.co/600x400.png',
+    publicationDate: '2024-04-15',
+    authorName: 'Jane Doe',
+    authorImage: 'https://placehold.co/100x100.png',
+    content: (
+      <div className="space-y-6">
+        <p>The gig economy offers unprecedented freedom and flexibility, but it also comes with its own set of challenges. Managing finances, finding consistent work, and avoiding burnout are crucial for long-term success.</p>
+        <p>We'll cover essential topics like setting your rates, marketing your services, and using tools to streamline your workflow. Whether you're a writer, designer, or consultant, these tips will help you build a sustainable and rewarding freelance career.</p>
+      </div>
+    ),
+    contentText: "The gig economy offers unprecedented freedom and flexibility, but it also comes with its own set of challenges. Managing finances, finding consistent work, and avoiding burnout are crucial for long-term success. We'll cover essential topics like setting your rates, marketing your services, and using tools to streamline your workflow. Whether you're a writer, designer, or consultant, these tips will help you build a sustainable and rewarding freelance career.",
+  }
 ];
 
 export const authorProfile = {

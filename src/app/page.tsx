@@ -1,8 +1,33 @@
+"use client";
+
+import { useState } from 'react';
 import { blogPosts } from '@/lib/data';
 import { BlogCard } from '@/components/blog/blog-card';
 import { AdSpot } from '@/components/shared/ad-spot';
+import { Button } from '@/components/ui/button';
+
+const POSTS_PER_PAGE = 3;
+const allCategories = ['All', ...Array.from(new Set(blogPosts.map(post => post.category)))];
 
 export default function Home() {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [visiblePostsCount, setVisiblePostsCount] = useState(POSTS_PER_PAGE);
+
+  const filteredPosts = selectedCategory === 'All' 
+    ? blogPosts 
+    : blogPosts.filter(post => post.category === selectedCategory);
+
+  const visiblePosts = filteredPosts.slice(0, visiblePostsCount);
+
+  const handleLoadMore = () => {
+    setVisiblePostsCount(prevCount => prevCount + POSTS_PER_PAGE);
+  };
+  
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setVisiblePostsCount(POSTS_PER_PAGE); // Reset on category change
+  }
+
   return (
     <div className="container mx-auto px-4 py-8 md:py-12">
       <header className="text-center mb-12">
@@ -12,11 +37,32 @@ export default function Home() {
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
         <div className="md:col-span-9">
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            {allCategories.map(category => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? 'default' : 'outline'}
+                onClick={() => handleCategoryChange(category)}
+                className="rounded-full"
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
+            {visiblePosts.map((post) => (
               <BlogCard key={post.id} post={post} />
             ))}
           </div>
+
+          {visiblePostsCount < filteredPosts.length && (
+            <div className="text-center mt-12">
+              <Button onClick={handleLoadMore} size="lg" className="rounded-full">
+                Load More Posts
+              </Button>
+            </div>
+          )}
         </div>
         <aside className="md:col-span-3">
           <div className="sticky top-12 flex flex-col gap-8">
