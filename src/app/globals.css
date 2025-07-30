@@ -70,7 +70,7 @@ body {
   body {
     @apply text-foreground;
     background-color: hsl(var(--background));
-    background-image: linear-gradient(to top, hsl(var(--background)), hsl(var(--secondary)));
+    background-image: linear-gradient(to bottom right, #6fa8dc, #8e7cc3);
     background-attachment: fixed;
   }
 }
