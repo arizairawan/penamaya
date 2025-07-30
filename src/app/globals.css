@@ -70,7 +70,7 @@ body {
   body {
     @apply text-foreground;
     background-color: hsl(var(--background));
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3e%3cpath fill='%2360a5fa' d='M0 384 C256 256,768 512,1024 384 L1024 0 L0 0 Z'%3e%3c/path%3e%3cpath fill='%233b82f6' d='M0 512 C256 384,768 640,1024 512 L1024 256 C768 384,256 256,0 384 Z'%3e%3c/path%3e%3cpath fill='%232563eb' d='M0 640 C256 512,768 768,1024 640 L1024 384 C768 512,256 384,0 512 Z'%3e%3c/path%3e%3cpath fill='%231d4ed8' d='M0 768 C256 640,768 896,1024 768 L1024 512 C768 640,256 512,0 640 Z'%3e%3c/path%3e%3cpath fill='%231e40af' d='M0 896 C256 768,768 1024,1024 896 L1024 640 C768 768,256 640,0 768 Z'%3e%3c/path%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3e%3crect width='800' height='600' fill='%23e5e7eb'/%3e%3ccircle cx='50' cy='450' r='40' fill='%2360a5fa'/%3e%3ccircle cx='750' cy='550' r='150' fill='%2360a5fa'/%3e%3ccircle cx='450' cy='500' r='100' fill='%2360a5fa'/%3e%3ccircle cx='200' cy='100' r='80' fill='%2360a5fa'/%3e%3ccircle cx='700' cy='50' r='60' fill='%2360a5fa'/%3e%3c/svg%3e");
     background-size: cover;
     background-attachment: fixed;
   }
