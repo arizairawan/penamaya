@@ -10,6 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { ThemeToggle } from '@/components/shared/theme-toggle';
 
 
 const navItems = [
@@ -47,6 +48,7 @@ export function Navbar() {
               </Tooltip>
             );
           })}
+           <ThemeToggle />
         </div>
       </TooltipProvider>
     </nav>
