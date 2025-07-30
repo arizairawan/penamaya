@@ -13,18 +13,18 @@ export function BlogCard({ post }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
       <Card className="h-full flex flex-col overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1">
-        <CardHeader className="p-0">
-          <div className="relative h-48 w-full">
+        <CardHeader className="p-4">
+          <div className="relative h-48 w-full overflow-hidden rounded-md">
             <Image
               src={post.coverImage}
               alt={post.title}
               fill
-              className="object-cover"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
               data-ai-hint="writing creativity"
             />
           </div>
         </CardHeader>
-        <CardContent className="flex-grow p-6">
+        <CardContent className="flex-grow p-6 pt-0">
           <Badge variant="secondary" className="mb-2">{post.category}</Badge>
           <CardTitle className="text-lg font-semibold leading-snug mb-2">{post.title}</CardTitle>
           <p className="text-sm text-muted-foreground line-clamp-2">{post.summary}</p>
