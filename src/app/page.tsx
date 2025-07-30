@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { blogPosts } from '@/lib/data';
 import { BlogCard } from '@/components/blog/blog-card';
 import { AdSpot } from '@/components/shared/ad-spot';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 const POSTS_PER_PAGE = 3;
 const allCategories = ['All', ...Array.from(new Set(blogPosts.map(post => post.category)))];
@@ -12,6 +13,7 @@ const allCategories = ['All', ...Array.from(new Set(blogPosts.map(post => post.c
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [visiblePostsCount, setVisiblePostsCount] = useState(POSTS_PER_PAGE);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const filteredPosts = selectedCategory === 'All' 
     ? blogPosts 
@@ -24,8 +26,14 @@ export default function Home() {
   };
   
   const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
-    setVisiblePostsCount(POSTS_PER_PAGE); // Reset on category change
+    if (category === selectedCategory) return;
+
+    setIsAnimating(true);
+    setTimeout(() => {
+      setSelectedCategory(category);
+      setVisiblePostsCount(POSTS_PER_PAGE);
+      setIsAnimating(false);
+    }, 300); // Should match animation duration
   }
 
   return (
@@ -50,7 +58,10 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className={cn(
+            "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 transition-opacity duration-300",
+            isAnimating ? 'opacity-0' : 'opacity-100'
+          )}>
             {visiblePosts.map((post) => (
               <BlogCard key={post.id} post={post} />
             ))}
