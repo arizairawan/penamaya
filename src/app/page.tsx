@@ -7,7 +7,7 @@ import { AdSpot } from '@/components/shared/ad-spot';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-const POSTS_PER_PAGE = 3;
+const POSTS_PER_PAGE = 6;
 const allCategories = ['All', ...Array.from(new Set(blogPosts.map(post => post.category)))];
 
 export default function Home() {
