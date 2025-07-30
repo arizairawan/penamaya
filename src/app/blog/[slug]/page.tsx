@@ -11,6 +11,7 @@ import { BlogActions } from '@/components/blog/blog-actions';
 import { Separator } from '@/components/ui/separator';
 import type { Metadata } from 'next';
 import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -77,10 +78,12 @@ export default function BlogDetailPage({ params }: PageProps) {
 
   return (
     <div className="container mx-auto px-4 py-8 md:py-12 max-w-4xl">
-       <Link href="/" className="inline-flex items-center gap-2 text-primary hover:underline mb-8">
-        <ArrowLeft className="w-4 h-4" />
-        Back to all posts
-      </Link>
+       <Button asChild variant="outline" className="rounded-full mb-8 bg-card/80 backdrop-blur-sm">
+        <Link href="/" className="inline-flex items-center gap-2">
+            <ArrowLeft className="w-4 h-4" />
+            Back to all posts
+        </Link>
+       </Button>
       <Card>
         <CardContent className="pt-6">
           <article>
