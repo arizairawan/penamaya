@@ -68,6 +68,8 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: hsl(var(--background));
+    background-image: linear-gradient(to top, hsl(var(--background)), hsl(var(--secondary)));
   }
 }
