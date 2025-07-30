@@ -130,6 +130,78 @@ export const blogPosts: BlogPost[] = [
       </div>
     ),
     contentText: "The gig economy offers unprecedented freedom and flexibility, but it also comes with its own set of challenges. Managing finances, finding consistent work, and avoiding burnout are crucial for long-term success. We'll cover essential topics like setting your rates, marketing your services, and using tools to streamline your workflow. Whether you're a writer, designer, or consultant, these tips will help you build a sustainable and rewarding freelance career.",
+  },
+  {
+    id: 7,
+    slug: 'mastering-public-speaking',
+    title: 'Mastering the Art of Public Speaking',
+    summary: 'Tips and tricks to become a more confident and effective public speaker, whether online or in person.',
+    category: 'Personal Growth',
+    coverImage: 'https://placehold.co/600x400.png',
+    publicationDate: '2024-04-10',
+    authorName: 'Jane Doe',
+    authorImage: 'https://placehold.co/100x100.png',
+    content: (
+      <div className="space-y-6">
+        <p>Public speaking is a skill that can unlock countless opportunities, yet it's a source of anxiety for many. This post breaks down the fundamentals of effective public speaking, from structuring your talk to engaging your audience.</p>
+        <p>We'll cover techniques for managing nerves, using body language effectively, and designing compelling visual aids. With practice and the right strategies, you can learn to command a room and deliver your message with impact.</p>
+      </div>
+    ),
+    contentText: "Public speaking is a skill that can unlock countless opportunities, yet it's a source of anxiety for many. This post breaks down the fundamentals of effective public speaking, from structuring your talk to engaging your audience. We'll cover techniques for managing nerves, using body language effectively, and designing compelling visual aids. With practice and the right strategies, you can learn to command a room and deliver your message with impact."
+  },
+  {
+    id: 8,
+    slug: 'psychology-of-color',
+    title: 'The Psychology of Color in Design',
+    summary: 'Learn how different colors evoke specific emotions and how to use them effectively in your creative projects.',
+    category: 'Creativity',
+    coverImage: 'https://placehold.co/600x400.png',
+    publicationDate: '2024-04-05',
+    authorName: 'Jane Doe',
+    authorImage: 'https://placehold.co/100x100.png',
+    content: (
+      <div className="space-y-6">
+        <p>Color is a powerful tool in a designer's arsenal. It can influence mood, attract attention, and even guide user behavior. Understanding the psychology of color is key to creating designs that are not only aesthetically pleasing but also effective.</p>
+        <p>This article explores the meanings associated with different colors across various cultures and provides practical advice on how to build a color palette that aligns with your brand's message and goals.</p>
+      </div>
+    ),
+    contentText: "Color is a powerful tool in a designer's arsenal. It can influence mood, attract attention, and even guide user behavior. Understanding the psychology of color is key to creating designs that are not only aesthetically pleasing but also effective. This article explores the meanings associated with different colors across various cultures and provides practical advice on how to build a color palette that aligns with your brand's message and goals."
+  },
+  {
+    id: 9,
+    slug: 'deep-work-strategies',
+    title: 'How to Achieve Deep Work in a Distracted World',
+    summary: 'Strategies for focusing intensely on cognitively demanding tasks, inspired by Cal Newport\'s book.',
+    category: 'Productivity',
+    coverImage: 'https://placehold.co/600x400.png',
+    publicationDate: '2024-03-28',
+    authorName: 'Jane Doe',
+    authorImage: 'https://placehold.co/100x100.png',
+    content: (
+      <div className="space-y-6">
+        <p>In our hyper-connected world, the ability to focus without distraction—to perform 'deep work'—is becoming increasingly rare and valuable. It's the key to producing high-quality work and mastering complex skills.</p>
+        <p>Inspired by Cal Newport's groundbreaking book, this post provides actionable strategies for cultivating a deep work habit. We'll discuss how to schedule your focus time, minimize distractions, and train your brain to concentrate for extended periods.</p>
+      </div>
+    ),
+    contentText: "In our hyper-connected world, the ability to focus without distraction—to perform 'deep work'—is becoming increasingly rare and valuable. It's the key to producing high-quality work and mastering complex skills. Inspired by Cal Newport's groundbreaking book, this post provides actionable strategies for cultivating a deep work habit. We'll discuss how to schedule your focus time, minimize distractions, and train your brain to concentrate for extended periods."
+  },
+  {
+    id: 10,
+    slug: 'ai-and-the-future-of-creativity',
+    title: 'AI and the Future of Creativity',
+    summary: 'Exploring how artificial intelligence is changing the creative landscape and what it means for creators.',
+    category: 'Future of Work',
+    coverImage: 'https://placehold.co/600x400.png',
+    publicationDate: '2024-03-22',
+    authorName: 'Jane Doe',
+    authorImage: 'https://placehold.co/100x100.png',
+    content: (
+      <div className="space-y-6">
+        <p>Artificial intelligence is no longer science fiction; it's a tool that is actively reshaping creative industries. From generating text and images to composing music, AI is opening up new avenues for artistic expression.</p>
+        <p>This article explores the exciting possibilities and potential pitfalls of AI in creativity. We'll look at how creators can leverage AI as a collaborative partner and discuss the ethical considerations that come with this powerful new technology.</p>
+      </div>
+    ),
+    contentText: "Artificial intelligence is no longer science fiction; it's a tool that is actively reshaping creative industries. From generating text and images to composing music, AI is opening up new avenues for artistic expression. This article explores the exciting possibilities and potential pitfalls of AI in creativity. We'll look at how creators can leverage AI as a collaborative partner and discuss the ethical considerations that come with this powerful new technology."
   }
 ];
 
