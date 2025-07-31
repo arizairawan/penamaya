@@ -213,5 +213,7 @@ export const authorProfile = {
     twitter: 'https://twitter.com/janedoe',
     linkedin: 'https://linkedin.com/in/janedoe',
     github: 'https://github.com/janedoe',
+    facebook: 'https://facebook.com/janedoe',
+    instagram: 'https://instagram.com/janedoe',
   },
 };
