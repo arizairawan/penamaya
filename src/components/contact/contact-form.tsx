@@ -96,7 +96,7 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full rounded-full" size="lg">
+        <Button type="submit" className="w-full rounded-full" size="lg" variant="outline">
           Send Message
         </Button>
       </form>

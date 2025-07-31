@@ -69,7 +69,7 @@ export default function Home() {
 
           {visiblePostsCount < filteredPosts.length && (
             <div className="text-center mt-12">
-              <Button onClick={handleLoadMore} size="lg" className="rounded-full">
+              <Button onClick={handleLoadMore} size="lg" className="rounded-full" variant="outline">
                 Load More Posts
               </Button>
             </div>

@@ -52,7 +52,7 @@ export function BlogActions({ post }: BlogActionsProps) {
       <div className="flex items-center gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline">
+            <Button variant="outline" className="rounded-full">
               <Share2 className="mr-2 h-4 w-4" />
               Share
             </Button>
@@ -77,7 +77,7 @@ export function BlogActions({ post }: BlogActionsProps) {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button variant="outline" onClick={() => setShowComments(!showComments)}>
+        <Button variant="outline" onClick={() => setShowComments(!showComments)} className="rounded-full">
           <MessageSquare className="mr-2 h-4 w-4" />
           {showComments ? 'Hide' : 'Show'} Comments
         </Button>
@@ -100,7 +100,7 @@ export function BlogActions({ post }: BlogActionsProps) {
             </div>
             <div className="flex flex-col gap-2">
                <Textarea placeholder="Write a comment..." />
-               <Button className="self-end">Post Comment</Button>
+               <Button className="self-end rounded-full" variant="outline">Post Comment</Button>
             </div>
           </CardContent>
         </Card>
