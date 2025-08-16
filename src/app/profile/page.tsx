@@ -43,18 +43,30 @@ export default async function ProfilePage() {
   return (
     <div className="container mx-auto px-4 py-8 md:py-12 max-w-2xl">
       <Card className="overflow-hidden">
-        <CardHeader className="text-center p-8 bg-secondary">
-          <div className="relative w-32 h-32 mx-auto mb-4">
+        <CardHeader className="relative text-center p-8 h-48 flex flex-col justify-center items-center">
+           {authorProfile.banner && (
             <Image
-              src={authorProfile.picture}
-              alt={authorProfile.name}
-              width={128}
-              height={128}
-              className="rounded-full border-4 border-card"
-              data-ai-hint="author portrait"
+              src={authorProfile.banner}
+              alt={`${authorProfile.name}'s banner`}
+              fill
+              className="object-cover"
+              data-ai-hint="header background"
             />
+          )}
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+          <div className="relative z-10">
+            <div className="relative w-32 h-32 mx-auto mb-4">
+              <Image
+                src={authorProfile.picture}
+                alt={authorProfile.name}
+                width={128}
+                height={128}
+                className="rounded-full border-4 border-card/80"
+                data-ai-hint="author portrait"
+              />
+            </div>
+            <CardTitle className="text-3xl font-bold text-white">{authorProfile.name}</CardTitle>
           </div>
-          <CardTitle className="text-3xl font-bold">{authorProfile.name}</CardTitle>
         </CardHeader>
         <CardContent className="p-8">
           <div 
