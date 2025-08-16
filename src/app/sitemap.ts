@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
-import { blogPosts } from '@/lib/data';
+import { getBlogPosts } from '@/lib/firebase';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
   const staticPages = [
@@ -25,7 +25,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const blogPages = blogPosts.map((post) => ({
+  const posts = await getBlogPosts();
+  const blogPages = posts.map((post) => ({
     url: `${siteUrl}/blog/${post.slug}`,
     lastModified: new Date(post.publicationDate),
     changeFrequency: 'weekly',

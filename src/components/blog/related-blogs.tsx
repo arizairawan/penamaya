@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { recommendRelatedBlogs } from '@/ai/flows/recommend-related-blogs';
-import type { BlogPost } from '@/lib/data';
+import type { BlogPost } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ArrowRight } from 'lucide-react';
@@ -33,7 +33,7 @@ export function RelatedBlogs({ currentPost, allPosts }: RelatedBlogsProps) {
             setRelated(recommendations);
         }
       } catch (error) {
-        console.error("Failed to get related blogs:", error);
+        console.error("Gagal mendapatkan blog terkait:", error);
       } finally {
         setLoading(false);
       }
@@ -46,7 +46,7 @@ export function RelatedBlogs({ currentPost, allPosts }: RelatedBlogsProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Related Articles</CardTitle>
+        <CardTitle>Artikel Terkait</CardTitle>
       </CardHeader>
       <CardContent>
         {loading ? (
@@ -67,7 +67,7 @@ export function RelatedBlogs({ currentPost, allPosts }: RelatedBlogsProps) {
             ))}
           </ul>
         ) : (
-          <p className="text-muted-foreground">No related articles found.</p>
+          <p className="text-muted-foreground">Tidak ada artikel terkait yang ditemukan.</p>
         )}
       </CardContent>
     </Card>

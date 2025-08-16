@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Share2, MessageSquare, Twitter, Facebook, Linkedin, Link as LinkIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { type BlogPost } from '@/lib/data';
+import type { BlogPost } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import {
@@ -27,15 +27,15 @@ export function BlogActions({ post }: BlogActionsProps) {
     const url = window.location.href;
     navigator.clipboard.writeText(url).then(() => {
       toast({
-        title: "Link Copied!",
-        description: "Blog post URL has been copied to your clipboard.",
+        title: "Tautan Disalin!",
+        description: "URL postingan blog telah disalin ke clipboard Anda.",
       });
     });
   };
 
   const createShareLink = (platform: 'twitter' | 'facebook' | 'linkedin') => {
     const url = typeof window !== 'undefined' ? window.location.href : '';
-    const text = encodeURIComponent(`Check out this article: ${post.title}`);
+    const text = encodeURIComponent(`Lihat artikel ini: ${post.title}`);
     
     switch (platform) {
       case 'twitter':
@@ -52,9 +52,9 @@ export function BlogActions({ post }: BlogActionsProps) {
       <div className="flex items-center gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="rounded-full">
+            <Button variant="outline" className="rounded-full bg-card/80 backdrop-blur-sm">
               <Share2 className="mr-2 h-4 w-4" />
-              Share
+              Bagikan
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -72,35 +72,35 @@ export function BlogActions({ post }: BlogActionsProps) {
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handleCopyToClipboard}>
               <LinkIcon className="mr-2 h-4 w-4" />
-              <span>Copy Link</span>
+              <span>Salin Tautan</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button variant="outline" onClick={() => setShowComments(!showComments)} className="rounded-full">
+        <Button variant="outline" onClick={() => setShowComments(!showComments)} className="rounded-full bg-card/80 backdrop-blur-sm">
           <MessageSquare className="mr-2 h-4 w-4" />
-          {showComments ? 'Hide' : 'Show'} Comments
+          {showComments ? 'Sembunyikan' : 'Tampilkan'} Komentar
         </Button>
       </div>
 
       {showComments && (
         <Card>
           <CardHeader>
-            <CardTitle>Comments</CardTitle>
+            <CardTitle>Komentar</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-4">
-              {/* This is a placeholder for actual comments */}
+              {/* Ini adalah placeholder untuk komentar sebenarnya */}
               <div className="flex items-start gap-4">
                 <div className="text-sm">
                   <p className="font-semibold">Alex</p>
-                  <p>Great article, really insightful!</p>
+                  <p>Artikel yang bagus, sangat berwawasan!</p>
                 </div>
               </div>
             </div>
             <div className="flex flex-col gap-2">
-               <Textarea placeholder="Write a comment..." />
-               <Button className="self-end rounded-full" variant="outline">Post Comment</Button>
+               <Textarea placeholder="Tulis komentar..." />
+               <Button className="self-end rounded-full" variant="outline">Kirim Komentar</Button>
             </div>
           </CardContent>
         </Card>

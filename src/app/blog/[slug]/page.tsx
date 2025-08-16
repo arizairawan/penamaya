@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { blogPosts } from '@/lib/data';
+import { getBlogPosts } from '@/lib/firebase';
+import type { BlogPost } from '@/lib/types';
 import { RelatedBlogs } from '@/components/blog/related-blogs';
 import { AdSpot } from '@/components/shared/ad-spot';
-import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowLeft } from 'lucide-react';
 import { BlogActions } from '@/components/blog/blog-actions';
@@ -14,7 +14,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }
@@ -25,12 +26,17 @@ interface PageProps {
   };
 }
 
+async function getPost(slug: string): Promise<BlogPost | undefined> {
+    const posts = await getBlogPosts();
+    return posts.find((p) => p.slug === slug);
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+  const post = await getPost(params.slug);
 
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: 'Postingan Tidak Ditemukan',
     };
   }
 
@@ -69,19 +75,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function BlogDetailPage({ params }: PageProps) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+export default async function BlogDetailPage({ params }: PageProps) {
+  const post = await getPost(params.slug);
 
   if (!post) {
     notFound();
   }
+
+  const allPosts = await getBlogPosts();
+
 
   return (
     <div className="container mx-auto px-4 py-8 md:py-12 max-w-4xl">
        <Button asChild variant="outline" className="rounded-full mb-8 bg-card/80 backdrop-blur-sm">
         <Link href="/" className="inline-flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" />
-            Back to all posts
+            Kembali ke semua postingan
         </Link>
        </Button>
       <Card>
@@ -109,14 +118,13 @@ export default function BlogDetailPage({ params }: PageProps) {
                 </div>
                 <span>•</span>
                 <time dateTime={post.publicationDate}>
-                  {new Date(post.publicationDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  {new Date(post.publicationDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
                 </time>
               </div>
             </header>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-              <div className="md:col-span-9 prose dark:prose-invert max-w-none">
-                {post.content}
+              <div className="md:col-span-9 prose dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: post.content as string }}>
               </div>
               <aside className="md:col-span-3">
                 <div className="sticky top-12">
@@ -133,7 +141,7 @@ export default function BlogDetailPage({ params }: PageProps) {
           <Separator className="my-12" />
 
           <div className="mt-16">
-            <RelatedBlogs currentPost={post} allPosts={blogPosts} />
+            <RelatedBlogs currentPost={post} allPosts={allPosts} />
           </div>
         </CardContent>
       </Card>
