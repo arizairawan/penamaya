@@ -1,7 +1,7 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
-import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, getDoc, addDoc, serverTimestamp } from "firebase/firestore";
 import { firebaseConfig } from "./firebaseConfig";
-import type { BlogPost, AuthorProfile } from "./types";
+import type { BlogPost, AuthorProfile, Message } from "./types";
 
 // Inisialisasi Firebase
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
@@ -100,7 +100,7 @@ export const getAuthorProfile = async (): Promise<AuthorProfile> => {
       keyword: profileData.keyword || defaultProfile.keyword,
       socialMediaLinks: {
           ...defaultSocials,
-          ...contactData
+          ...(contactData || {}),
       },
     };
 
@@ -112,4 +112,23 @@ export const getAuthorProfile = async (): Promise<AuthorProfile> => {
       tagline: "Terjadi kesalahan saat mengambil tagline.",
     };
   }
+};
+
+
+// Fungsi untuk menambahkan pesan baru
+export const addMessage = async (message: Message): Promise<void> => {
+    if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes("PASTE_YOUR")) {
+        console.warn("Konfigurasi Firebase belum diisi. Pesan tidak akan dikirim.");
+        return;
+    }
+    try {
+        const messagesCollection = collection(db, "messages");
+        await addDoc(messagesCollection, {
+            ...message,
+            createdAt: serverTimestamp(),
+        });
+    } catch (error) {
+        console.error("Error menambahkan pesan:", error);
+        throw error;
+    }
 };
