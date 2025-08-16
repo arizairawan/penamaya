@@ -1,7 +1,7 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { firebaseConfig } from "./firebaseConfig";
-import type { BlogPost } from "./types";
+import type { BlogPost, AuthorProfile } from "./types";
 
 // Inisialisasi Firebase
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
@@ -39,5 +39,56 @@ export const getBlogPosts = async (): Promise<BlogPost[]> => {
   } catch (error) {
     console.error("Error mengambil postingan blog:", error);
     return [];
+  }
+};
+
+// Fungsi untuk mengambil data profil penulis
+export const getAuthorProfile = async (): Promise<AuthorProfile> => {
+  const socialMediaLinks = {
+    twitter: 'https://twitter.com/janedoe',
+    linkedin: 'https://linkedin.com/in/janedoe',
+    github: 'https://github.com/janedoe',
+    facebook: 'https://facebook.com/janedoe',
+    instagram: 'https://instagram.com/janedoe',
+  };
+
+  if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes("PASTE_YOUR")) {
+    console.warn("Konfigurasi Firebase belum diisi. Mengembalikan data profil default.");
+    return {
+      name: 'Jane Doe',
+      bio: "Seorang penulis yang bersemangat, ahli strategi digital, dan pembelajar seumur hidup, Jane telah berbagi wawasannya tentang kreativitas, produktivitas, dan personal branding selama lebih dari satu dekade. Saat tidak sedang menulis, dia menjelajahi jalur pendakian baru atau meringkuk dengan buku yang bagus.",
+      picture: 'https://placehold.co/200x200.png',
+      socialMediaLinks,
+    };
+  }
+  try {
+    const profileDocRef = doc(db, "settings", "profile");
+    const profileDoc = await getDoc(profileDocRef);
+
+    if (profileDoc.exists()) {
+      const data = profileDoc.data();
+      return {
+        name: data.name || 'Jane Doe',
+        bio: data.description || 'Bio tidak tersedia.',
+        picture: data.logo || 'https://placehold.co/200x200.png',
+        socialMediaLinks, // Tautan media sosial masih statis untuk saat ini
+      };
+    } else {
+      console.warn("Dokumen profil tidak ditemukan di Firestore. Mengembalikan data default.");
+      return {
+        name: 'Jane Doe',
+        bio: 'Bio tidak tersedia.',
+        picture: 'https://placehold.co/200x200.png',
+        socialMediaLinks,
+      };
+    }
+  } catch (error) {
+    console.error("Error mengambil profil penulis:", error);
+    return {
+      name: 'Jane Doe',
+      bio: "Terjadi kesalahan saat mengambil bio.",
+      picture: 'https://placehold.co/200x200.png',
+      socialMediaLinks,
+    };
   }
 };

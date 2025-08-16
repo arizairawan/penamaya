@@ -1,22 +1,24 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { authorProfile } from '@/lib/data';
+import { getAuthorProfile } from '@/lib/firebase';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Twitter, Linkedin, Github, Facebook, Instagram } from 'lucide-react';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Author Profile',
-  description: `Learn more about ${authorProfile.name}, a passionate writer and digital strategist.`,
-   alternates: {
-    canonical: '/profile',
-  },
-  openGraph: {
-    title: `${authorProfile.name} | PenaMaya`,
-    description: authorProfile.bio,
-    url: '/profile',
-    images: [
+export async function generateMetadata(): Promise<Metadata> {
+  const authorProfile = await getAuthorProfile();
+  return {
+    title: 'Author Profile',
+    description: `Learn more about ${authorProfile.name}, a passionate writer and digital strategist.`,
+    alternates: {
+      canonical: '/profile',
+    },
+    openGraph: {
+      title: `${authorProfile.name} | PenaMaya`,
+      description: authorProfile.bio,
+      url: '/profile',
+      images: [
         {
           url: authorProfile.picture,
           width: 200,
@@ -24,15 +26,18 @@ export const metadata: Metadata = {
           alt: authorProfile.name,
         },
       ],
-  },
-  twitter: {
-    title: `${authorProfile.name} | PenaMaya`,
-    description: authorProfile.bio,
-     images: [authorProfile.picture],
-  },
-};
+    },
+    twitter: {
+      title: `${authorProfile.name} | PenaMaya`,
+      description: authorProfile.bio,
+      images: [authorProfile.picture],
+    },
+  };
+}
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const authorProfile = await getAuthorProfile();
+
   return (
     <div className="container mx-auto px-4 py-8 md:py-12 max-w-2xl">
       <Card className="overflow-hidden">
