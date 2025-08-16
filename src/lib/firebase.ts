@@ -73,27 +73,37 @@ export const getAuthorProfile = async (): Promise<AuthorProfile> => {
   }
   try {
     const profileDocRef = doc(db, "settings", "profile");
-    const profileDoc = await getDoc(profileDocRef);
+    const contactDocRef = doc(db, "settings", "contact");
 
-    if (profileDoc.exists()) {
-      const data = profileDoc.data();
-      return {
-        name: data.name || defaultProfile.name,
-        bio: data.description || defaultProfile.bio,
-        tagline: data.tagline || defaultProfile.tagline,
-        picture: data.logo || defaultProfile.picture,
-        banner: data.banner || defaultProfile.banner,
-        metadesc: data.metadesc || defaultProfile.metadesc,
-        keyword: data.keyword || defaultProfile.keyword,
-        socialMediaLinks: {
-            ...defaultSocials,
-            ...data.contact
-        },
-      };
-    } else {
-      console.warn("Dokumen profil tidak ditemukan di Firestore. Mengembalikan data default.");
-      return defaultProfile;
+    const [profileDoc, contactDoc] = await Promise.all([
+        getDoc(profileDocRef),
+        getDoc(contactDocRef)
+    ]);
+    
+    const profileData = profileDoc.exists() ? profileDoc.data() : {};
+    const contactData = contactDoc.exists() ? contactDoc.data() : {};
+
+    if (!profileDoc.exists()) {
+        console.warn("Dokumen profil tidak ditemukan di Firestore. Mengembalikan data default.");
     }
+     if (!contactDoc.exists()) {
+        console.warn("Dokumen kontak tidak ditemukan di Firestore. Mengembalikan data default.");
+    }
+
+    return {
+      name: profileData.name || defaultProfile.name,
+      bio: profileData.description || defaultProfile.bio,
+      tagline: profileData.tagline || defaultProfile.tagline,
+      picture: profileData.logo || defaultProfile.picture,
+      banner: profileData.banner || defaultProfile.banner,
+      metadesc: profileData.metadesc || defaultProfile.metadesc,
+      keyword: profileData.keyword || defaultProfile.keyword,
+      socialMediaLinks: {
+          ...defaultSocials,
+          ...contactData
+      },
+    };
+
   } catch (error) {
     console.error("Error mengambil profil penulis:", error);
     return {
