@@ -102,8 +102,8 @@ export default async function ProfilePage() {
           </div>
           <div className="flex justify-center gap-4 flex-wrap">
             {socialLinks.map(([key, value]) => {
-                const Icon = socialIcons[key];
-                const link = key === 'email' ? `mailto:${value}` : key === 'phone' ? `tel:${value}` : value;
+                const Icon = socialIcons[key as keyof typeof socialIcons];
+                const link = key === 'email' ? `mailto:${value}` : key === 'phone' ? `tel:${value}` : value as string;
                 if (!Icon) return null;
 
                 return (
