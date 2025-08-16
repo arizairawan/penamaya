@@ -17,6 +17,7 @@ export interface BlogPost {
 export interface AuthorProfile {
     name: string;
     bio: string;
+    tagline: string;
     picture: string;
     socialMediaLinks: {
         twitter: string;

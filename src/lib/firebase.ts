@@ -55,8 +55,9 @@ export const getAuthorProfile = async (): Promise<AuthorProfile> => {
   if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes("PASTE_YOUR")) {
     console.warn("Konfigurasi Firebase belum diisi. Mengembalikan data profil default.");
     return {
-      name: 'Jane Doe',
+      name: 'PenaMaya',
       bio: "Seorang penulis yang bersemangat, ahli strategi digital, dan pembelajar seumur hidup, Jane telah berbagi wawasannya tentang kreativitas, produktivitas, dan personal branding selama lebih dari satu dekade. Saat tidak sedang menulis, dia menjelajahi jalur pendakian baru atau meringkuk dengan buku yang bagus.",
+      tagline: 'Wawasan, cerita, dan ide dari penulis kami.',
       picture: 'https://placehold.co/200x200.png',
       socialMediaLinks,
     };
@@ -68,16 +69,18 @@ export const getAuthorProfile = async (): Promise<AuthorProfile> => {
     if (profileDoc.exists()) {
       const data = profileDoc.data();
       return {
-        name: data.name || 'Jane Doe',
+        name: data.name || 'PenaMaya',
         bio: data.description || 'Bio tidak tersedia.',
+        tagline: data.tagline || 'Tagline tidak tersedia.',
         picture: data.logo || 'https://placehold.co/200x200.png',
         socialMediaLinks, // Tautan media sosial masih statis untuk saat ini
       };
     } else {
       console.warn("Dokumen profil tidak ditemukan di Firestore. Mengembalikan data default.");
       return {
-        name: 'Jane Doe',
+        name: 'PenaMaya',
         bio: 'Bio tidak tersedia.',
+        tagline: 'Tagline tidak tersedia.',
         picture: 'https://placehold.co/200x200.png',
         socialMediaLinks,
       };
@@ -85,8 +88,9 @@ export const getAuthorProfile = async (): Promise<AuthorProfile> => {
   } catch (error) {
     console.error("Error mengambil profil penulis:", error);
     return {
-      name: 'Jane Doe',
+      name: 'PenaMaya',
       bio: "Terjadi kesalahan saat mengambil bio.",
+      tagline: "Terjadi kesalahan saat mengambil tagline.",
       picture: 'https://placehold.co/200x200.png',
       socialMediaLinks,
     };

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { getBlogPosts } from '@/lib/firebase';
-import type { BlogPost } from '@/lib/types';
+import { getBlogPosts, getAuthorProfile } from '@/lib/firebase';
+import type { BlogPost, AuthorProfile } from '@/lib/types';
 import { BlogCard } from '@/components/blog/blog-card';
 import { AdSpot } from '@/components/shared/ad-spot';
 import { Button } from '@/components/ui/button';
@@ -13,19 +13,24 @@ const POSTS_PER_PAGE = 6;
 
 export default function Home() {
   const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
+  const [profile, setProfile] = useState<AuthorProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [visiblePostsCount, setVisiblePostsCount] = useState(POSTS_PER_PAGE);
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchData = async () => {
       setLoading(true);
-      const posts = await getBlogPosts();
+      const [posts, profileData] = await Promise.all([
+        getBlogPosts(),
+        getAuthorProfile(),
+      ]);
       setAllPosts(posts);
+      setProfile(profileData);
       setLoading(false);
     };
-    fetchPosts();
+    fetchData();
   }, []);
 
   const allCategories = ['All', ...Array.from(new Set(allPosts.map(post => post.category)))];
@@ -54,8 +59,17 @@ export default function Home() {
   return (
     <div className="container mx-auto px-4 py-8 md:py-12">
       <header className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-primary tracking-tight">PenaMaya</h1>
-        <p className="text-lg text-muted-foreground mt-2">Wawasan, cerita, dan ide dari penulis kami.</p>
+        {loading ? (
+            <>
+              <Skeleton className="h-12 w-1/2 mx-auto mb-4" />
+              <Skeleton className="h-6 w-3/4 mx-auto" />
+            </>
+        ) : (
+          <>
+            <h1 className="text-4xl md:text-5xl font-bold text-primary tracking-tight">{profile?.name}</h1>
+            <p className="text-lg text-muted-foreground mt-2">{profile?.tagline}</p>
+          </>
+        )}
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
