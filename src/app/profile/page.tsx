@@ -73,7 +73,7 @@ export default async function ProfilePage() {
                 src={authorProfile.banner}
                 alt={`${authorProfile.name}'s banner`}
                 fill
-                className="object-cover opacity-50"
+                className="object-cover"
                 data-ai-hint="header background"
                 />
             </div>
