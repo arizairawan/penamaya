@@ -53,7 +53,7 @@ export default async function ProfilePage() {
               data-ai-hint="header background"
             />
           )}
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-black/50"></div>
           <div className="relative z-10 py-8 px-4">
             <div className="relative w-32 h-32 mx-auto mb-4">
               <Image
