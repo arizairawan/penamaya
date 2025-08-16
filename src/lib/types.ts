@@ -28,5 +28,9 @@ export interface AuthorProfile {
         github: string;
         facebook: string;
         instagram: string;
+        youtube: string;
+        tiktok: string;
+        email: string;
+        phone: string;
     }
 }

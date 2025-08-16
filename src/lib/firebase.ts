@@ -44,14 +44,18 @@ export const getBlogPosts = async (): Promise<BlogPost[]> => {
 
 // Fungsi untuk mengambil data profil penulis
 export const getAuthorProfile = async (): Promise<AuthorProfile> => {
-  const socialMediaLinks = {
-    twitter: 'https://twitter.com/janedoe',
-    linkedin: 'https://linkedin.com/in/janedoe',
-    github: 'https://github.com/janedoe',
-    facebook: 'https://facebook.com/janedoe',
-    instagram: 'https://instagram.com/janedoe',
+  const defaultSocials = {
+    twitter: '#',
+    linkedin: '#',
+    github: '#',
+    facebook: '#',
+    instagram: '#',
+    youtube: '#',
+    tiktok: '#',
+    email: '#',
+    phone: '#',
   };
-
+  
   const defaultProfile: AuthorProfile = {
     name: 'PenaMaya',
     bio: "Seorang penulis yang bersemangat, ahli strategi digital, dan pembelajar seumur hidup, Jane telah berbagi wawasannya tentang kreativitas, produktivitas, dan personal branding selama lebih dari satu dekade. Saat tidak sedang menulis, dia menjelajahi jalur pendakian baru atau meringkuk dengan buku yang bagus.",
@@ -60,7 +64,7 @@ export const getAuthorProfile = async (): Promise<AuthorProfile> => {
     banner: 'https://placehold.co/600x400.png',
     metadesc: 'A personal blog platform for writers and creators.',
     keyword: 'blog, writing, creativity, personal development',
-    socialMediaLinks,
+    socialMediaLinks: defaultSocials,
   };
 
   if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes("PASTE_YOUR")) {
@@ -81,7 +85,10 @@ export const getAuthorProfile = async (): Promise<AuthorProfile> => {
         banner: data.banner || defaultProfile.banner,
         metadesc: data.metadesc || defaultProfile.metadesc,
         keyword: data.keyword || defaultProfile.keyword,
-        socialMediaLinks, // Tautan media sosial masih statis untuk saat ini
+        socialMediaLinks: {
+            ...defaultSocials,
+            ...data.contact
+        },
       };
     } else {
       console.warn("Dokumen profil tidak ditemukan di Firestore. Mengembalikan data default.");
