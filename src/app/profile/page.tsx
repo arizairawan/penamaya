@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAuthorProfile } from '@/lib/firebase';
@@ -55,9 +56,11 @@ export default async function ProfilePage() {
           <CardTitle className="text-3xl font-bold">{authorProfile.name}</CardTitle>
         </CardHeader>
         <CardContent className="p-8">
-          <p className="text-lg text-center text-muted-foreground mb-8">
-            {authorProfile.bio}
-          </p>
+          <div 
+            className="prose dark:prose-invert max-w-none text-center mx-auto mb-8 text-lg"
+            dangerouslySetInnerHTML={{ __html: authorProfile.bio as string }}
+          >
+          </div>
           <div className="flex justify-center gap-4">
             <Button asChild variant="outline" size="icon" className="rounded-full w-12 h-12">
               <Link href={authorProfile.socialMediaLinks.twitter} target="_blank" rel="noopener noreferrer">
