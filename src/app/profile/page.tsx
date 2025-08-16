@@ -10,13 +10,14 @@ import type { Metadata } from 'next';
 export async function generateMetadata(): Promise<Metadata> {
   const authorProfile = await getAuthorProfile();
   return {
-    title: 'Author Profile',
-    description: `Learn more about ${authorProfile.name}, a passionate writer and digital strategist.`,
+    title: `Profile - ${authorProfile.name}`,
+    description: authorProfile.metadesc,
+    keywords: authorProfile.keyword,
     alternates: {
       canonical: '/profile',
     },
     openGraph: {
-      title: `${authorProfile.name} | PenaMaya`,
+      title: `${authorProfile.name} | Profile`,
       description: authorProfile.bio,
       url: '/profile',
       images: [
@@ -29,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
     },
     twitter: {
-      title: `${authorProfile.name} | PenaMaya`,
+      title: `${authorProfile.name} | Profile`,
       description: authorProfile.bio,
       images: [authorProfile.picture],
     },

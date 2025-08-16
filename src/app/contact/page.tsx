@@ -1,23 +1,28 @@
 import { ContactForm } from '@/components/contact/contact-form';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import type { Metadata } from 'next';
+import { getAuthorProfile } from '@/lib/firebase';
 
-export const metadata: Metadata = {
-  title: 'Contact Us',
-  description: 'Have a question or want to work together? Drop us a message using the contact form.',
-  alternates: {
-    canonical: '/contact',
-  },
-  openGraph: {
-    title: 'Contact Us | PenaMaya',
-    description: 'Have a question or want to work together? Drop us a message.',
-    url: '/contact',
-  },
-  twitter: {
-    title: 'Contact Us | PenaMaya',
-    description: 'Have a question or want to work together? Drop us a message.',
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const profile = await getAuthorProfile();
+  return {
+    title: 'Contact Us',
+    description: profile.metadesc,
+    keywords: profile.keyword,
+    alternates: {
+      canonical: '/contact',
+    },
+    openGraph: {
+      title: `Contact Us | ${profile.name}`,
+      description: 'Have a question or want to work together? Drop us a message.',
+      url: '/contact',
+    },
+    twitter: {
+      title: `Contact Us | ${profile.name}`,
+      description: 'Have a question or want to work together? Drop us a message.',
+    },
+  };
+}
 
 export default function ContactPage() {
   return (

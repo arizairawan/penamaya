@@ -19,6 +19,8 @@ export interface AuthorProfile {
     bio: string;
     tagline: string;
     picture: string;
+    metadesc: string;
+    keyword: string;
     socialMediaLinks: {
         twitter: string;
         linkedin: string;
