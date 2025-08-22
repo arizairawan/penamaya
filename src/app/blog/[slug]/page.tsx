@@ -138,11 +138,6 @@ export default async function BlogDetailPage({ params }: PageProps) {
             <BlogActions post={post} />
           </div>
 
-          <Separator className="my-12" />
-
-          <div className="mt-16">
-            <RelatedBlogs currentPost={post} allPosts={allPosts} />
-          </div>
         </CardContent>
       </Card>
     </div>

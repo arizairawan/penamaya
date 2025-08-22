@@ -77,10 +77,10 @@ export function BlogActions({ post }: BlogActionsProps) {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button variant="outline" onClick={() => setShowComments(!showComments)} className="rounded-full bg-card/80 backdrop-blur-sm">
+        {/* <Button variant="outline" onClick={() => setShowComments(!showComments)} className="rounded-full bg-card/80 backdrop-blur-sm">
           <MessageSquare className="mr-2 h-4 w-4" />
           {showComments ? 'Sembunyikan' : 'Tampilkan'} Komentar
-        </Button>
+        </Button> */}
       </div>
 
       {showComments && (
